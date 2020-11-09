@@ -24,10 +24,8 @@ def scraping():
     
     #setting up url for picture scraping
     url2 = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-realurl = 'https://www.jpl.nasa.gov'
-browser.visit(url2)
-
-    #visit second site
+    realurl = 'https://www.jpl.nasa.gov'
+    browser.visit(url2)
     html2 = browser.html
     soup2 = BeautifulSoup (html2, 'html.parser')
     
@@ -66,13 +64,13 @@ browser.visit(url2)
     html_schiap = browser.html
     soup_schiap = BeautifulSoup(html_schiap, 'html.parser')
     schiaparelli = (soup_schiap.find_all('div', class_ = 'downloads' [0].li.a.get('href'))
+    
+    #syrtis_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced'
+    #browser.visit(syrtis_url)
+    #html_syrtis = browser.html
+    #soup_syrtis = BeautifulSoup(html_syrtis, 'html.parser')
+    #syrtis = (soup_syrtis.find_all('div', class_ = 'downloads')[0].li.a.get('href'))   
 
-    syrtis_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced'
-    browser.visit(syrtis_url)
-    html_syrtis = browser.html
-    soup_syrtis = BeautifulSoup(html_syrtis, 'html.parser')
-    syrtis = (soup_syrtis.find_all('div', class_ = 'downloads')[0].li.a.get('href'))
-      
     valles_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced'
     browser.visit(valles_url)
     html_valles = browser.html
