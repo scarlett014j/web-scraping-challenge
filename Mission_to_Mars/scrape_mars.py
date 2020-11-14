@@ -1,4 +1,4 @@
-from splinter import Browswer
+from splinter import Browser
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -50,7 +50,7 @@ def scraping():
     soup4 = BeautifulSoup(html4, 'html.parser')
     hemi = soup4.find_all('h3')
     hemispheres = [result.text[:-9] for result in hemi]
-    mars_data["hemispheres"] = hemipspheres
+    mars_data["hemispheres"] = hemispheres
     
     #different hemispheres images
     cerb_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced'
@@ -63,13 +63,14 @@ def scraping():
     browser.visit(schiap_url)
     html_schiap = browser.html
     soup_schiap = BeautifulSoup(html_schiap, 'html.parser')
-    schiaparelli = (soup_schiap.find_all('div', class_ = 'downloads' [0].li.a.get('href'))
+    schiaparelli = (soup_schiap.find_all('div', class_ = 'downloads')[0].li.a.get('href'))
     
-    #syrtis_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced'
-    #browser.visit(syrtis_url)
-    #html_syrtis = browser.html
-    #soup_syrtis = BeautifulSoup(html_syrtis, 'html.parser')
-    #syrtis = (soup_syrtis.find_all('div', class_ = 'downloads')[0].li.a.get('href'))   
+
+    syrtis_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced'
+    browser.visit(syrtis_url)
+    html_syrtis = browser.html
+    soup_syrtis = BeautifulSoup(html_syrtis, 'html.parser')
+    syrtis = (soup_syrtis.find_all('div', class_ = 'downloads')[0].li.a.get('href'))   
 
     valles_url = 'https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced'
     browser.visit(valles_url)

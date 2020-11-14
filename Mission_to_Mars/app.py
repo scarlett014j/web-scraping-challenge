@@ -1,7 +1,6 @@
-import scrape_mars
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
-
+import scrape_mars
 # Create an instance of our Flask app.
 app = Flask(__name__)
 
@@ -9,10 +8,10 @@ app = Flask(__name__)
 conn = 'mongodb://localhost:27017'
 
 # Pass connection to the pymongo instance.
-client = pymongo.MongoClient(conn)
+mongo = PyMongo(app, uri="mongodb://localhost:27017/mars")
 
 # Connect to a database. Will create one if not already available.
-db = client.mars_db
+db = mongo.mars_db
 collection = db.items
 
 
@@ -30,9 +29,9 @@ def index():
 
 @app.route('/scrape')
 def scrape():
-    result = scrape_mars.scrape_info()
+    result = scrape_mars.scraping()
     collection.insert_one(result)
-    return redirect('/', code = 302)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
